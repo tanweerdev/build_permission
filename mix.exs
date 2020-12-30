@@ -6,7 +6,20 @@ defmodule BuildPermission.MixProject do
       apps_path: "apps",
       version: "0.1.0",
       start_permanent: Mix.env() == :prod,
+      releases: releases(),
       deps: deps()
+    ]
+  end
+
+  defp releases do
+    [
+      my_build: [
+        applications: [
+          runtime_tools: :permanent
+        ],
+        # have Mix automatically create a tarball after assembly
+        steps: [:assemble, :tar]
+      ]
     ]
   end
 
